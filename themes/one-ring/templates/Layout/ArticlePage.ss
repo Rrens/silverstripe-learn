@@ -10,8 +10,10 @@
                 <h1 class="blog-title">$Title</h1>
 
                 <div class="blog-main-image">
-                    <img src="http://placehold.it/765x362" alt="" />
-                    <div class="tag"><i class="fa fa-file-text"></i></div>
+                    <% with $Photo.SetWidth(750) %>
+                    <img src="$URL" width="$Width" height="$Height" class="my-custom-class" />
+                    <% end_with %>
+                <div class="tag"><i class="fa fa-file-text"></i></div>
                 </div>
 
                 <div class="blog-bottom-info">
@@ -101,6 +103,19 @@
                         <i class="fa fa-print"></i>
                     </a>
                 </div>
+
+                <% if $Brochure %>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <% with $Brochure %>
+                        <a href="$URL" class="btn btn-warning btn-block">
+                            <i class="fa fa-download"></i>
+                            Download brochure ($Extension) [$Size]
+                        </a>
+                        <% end_with %>
+                    </div>
+                </div>
+                <% end_if %>
 
                 <h1 class="section-title">Comments</h1>
 
@@ -194,7 +209,8 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                    class="">
                                     <i class="fa fa-chevron-right"></i> 2014 (15)
                                 </a>
                             </div>

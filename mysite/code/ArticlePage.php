@@ -8,6 +8,11 @@ class ArticlePage extends Page
         'Author' => 'Varchar',
     );
 
+    private static $has_one = array(
+        'Photo' => 'Image',
+        'Brochure' => 'File',
+    );
+
     private static $can_be_root = false;
 
     public function getCMSFields()
@@ -22,6 +27,14 @@ class ArticlePage extends Page
         );
         $fields->addFieldToTab('Root.Main', TextareaField::create('Teaser'), 'Content');
         $fields->addFieldToTab('Root.Main', TextField::create('Author', 'Author of article'), 'Content');
+        $fields->addFieldsToTab('Root.Attachments',  $photo =  UploadField::create('Photo'));
+        $fields->addFieldsToTab('Root.Attachments',  $brochure =  UploadField::create('Brochure', 'Travel brochure optional (pdf only)'));
+
+        $photo->getValidator()->setAllowedExtensions(array('png', 'gif', 'jpg', 'jpeg'));
+        $photo->setFolderName('travel-photos');
+
+        $brochure->getValidator()->setAllowedExtensions(array('pdf'));
+        $brochure->setFolderName('travel-brochures');
 
         return $fields;
     }
