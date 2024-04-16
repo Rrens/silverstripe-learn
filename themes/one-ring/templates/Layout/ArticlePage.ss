@@ -13,14 +13,14 @@
                     <% with $Photo.SetWidth(750) %>
                     <img src="$URL" width="$Width" height="$Height" class="my-custom-class" />
                     <% end_with %>
-                <div class="tag"><i class="fa fa-file-text"></i></div>
+                    <div class="tag"><i class="fa fa-file-text"></i></div>
                 </div>
 
                 <div class="blog-bottom-info">
                     <ul>
-                        <li><i class="fa fa-calendar"></i> $Date</li>
+                        <li><i class="fa fa-calendar"></i> $Date.Long</li>
                         <li><i class="fa fa-comments-o"></i> 3 Comments</li>
-                        <li><i class="fa fa-tags"></i> Properties, Prices, best deals</li>
+                        <li><i class="fa fa-tags"></i> $CategoriesList </li>
                     </ul>
 
                     <div id="post-author"><i class="fa fa-pencil"></i> By $Author</div>
