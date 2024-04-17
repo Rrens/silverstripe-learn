@@ -5,12 +5,12 @@ $project = 'mysite';
 
 global $databaseConfig;
 $databaseConfig = array(
-	'type' => 'MySQLDatabase',
-	'server' => 'localhost',
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'SS_mysite',
-	'path' => ''
+    'type' => 'MySQLDatabase',
+    'server' => 'localhost',
+    'username' => 'root',
+    'password' => 'root',
+    'database' => 'SS_mysite',
+    'path' => ''
 );
 
 // Set the site locale
