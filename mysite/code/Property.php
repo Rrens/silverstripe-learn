@@ -8,6 +8,9 @@ class Property extends DataObject
         'Bedrooms' => 'Int',
         'Bathrooms' => 'Int',
         'FeaturedOnHomepage' => 'Boolean',
+        'AvailableStart' => 'Date',
+        'AvailableEnd' => 'Date',
+        'Description' => 'Text',
     );
 
     private static $has_one = array(
@@ -52,6 +55,7 @@ class Property extends DataObject
 
         $fields->addFieldsToTab('Root.Main', array(
             TextField::create('Title'),
+            TextareaField::create('Description'),
             CurrencyField::create('PricePerNight', 'Price (per night)'),
             DropdownField::create('Bedrooms')
                 ->setSource(ArrayLib::valuekey(range(1, 10))),

@@ -37,27 +37,69 @@
                 <!-- BEGIN PROPERTY LISTING -->
                 <div id="property-listing" class="list-style clearfix"> <!-- Inject "grid-style1" for grid view-->
                     <div class="row">
+                        <% if $Results %>
+                        <% loop $Results %>
+                        <div class="item col-md-4">
+                            <div class="image">
+                                <a href="$Link">
+                                    <span class="btn btn-default"><i class="fa fa-file-o"></i> Details</span>
+                                </a>
+                                $PrimaryPhoto.CroppedImage(760,670)
+                            </div>
+                            <div class="price">
+                                <span>$PricePerNight.Nice</span>
+                                <p>per night
+                                <p>
+                            </div>
+                            <div class="info">
+                                <h3>
+                                    <a href="$Link">$Title</a>
+                                    <small>$Region.Title</small>
+                                    <small>Available $AvailableStart.Nice - $AvailableEnd.Nice</small>
+                                </h3>
+                                <p>$Description.LimitSentences(3)</p>
 
+                                <ul class="amenities">
+                                    <li><i class="icon-bedrooms"></i> $Bedrooms</li>
+                                    <li><i class="icon-bathrooms"></i> $Bathrooms</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <% end_loop %>
+                        <% else %>
+                        <h3>There are no properties that match your search.
+                            <% end_if %>
                     </div>
                 </div>
                 <!-- END PROPERTY LISTING -->
 
 
                 <!-- BEGIN PAGINATION -->
+                <% if $Results.MoreThanOnePage %>
                 <div class="pagination">
+                    <% if $Results.NotFirstPage %>
                     <ul id="previous col-xs-6">
-                        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                        <li><a href="$Results.PrevLink"><i class="fa fa-chevron-left"></i></a></li>
                     </ul>
+                    <% end_if %>
                     <ul class="hidden-xs">
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
+                        <% loop $Results.PaginationSummary %>
+                        <% if $Link %>
+                        <li <% if $CurrentBool %>class="active"<% end_if %>>
+                            <a href="$Link">$PageNum</a>
+                        </li>
+                        <% else %>
+                        <li>...</li>
+                        <% end_if %>
+                        <% end_loop %>
                     </ul>
+                    <% if $Results.NotLastPage %>
                     <ul id="next col-xs-6">
-                        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+                        <li><a href="$Results.NextLink"><i class="fa fa-chevron-right"></i></a></li>
                     </ul>
+                    <% end_if %>
                 </div>
+                <% end_if %>
                 <!-- END PAGINATION -->
 
             </div>
@@ -71,18 +113,10 @@
                 <h2 class="section-title">Search Property</h2>
                 <div class="chzn-container-multi">
                     <ul class="chzn-choices">
-                        <li class="search-choice"><span>New York</span><a href="#"
+                        <% loop $ActiveFilters %>
+                        <li class="search-choice"><span>$Label</span><a href="$RemoveLink"
                                 class="search-choice-close"></a></li>
-                        <li class="search-choice"><span>Residential</span><a href="#"
-                                class="search-choice-close"></a></li>
-                        <li class="search-choice"><span>3 bedrooms</span><a href="#"
-                                class="search-choice-close"></a></li>
-                        <li class="search-choice"><span>2 bathrooms</span><a href="#"
-                                class="search-choice-close"></a></li>
-                        <li class="search-choice"><span>Min. $150</span><a href="#"
-                                class="search-choice-close"></a></li>
-                        <li class="search-choice"><span>Min. $400</span><a href="#"
-                                class="search-choice-close"></a></li>
+                        <% end_loop %>
                     </ul>
                 </div>
                 $PropertySearchForm
