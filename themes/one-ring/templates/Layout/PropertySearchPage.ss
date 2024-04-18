@@ -38,37 +38,37 @@
                 <div id="property-listing" class="list-style clearfix"> <!-- Inject "grid-style1" for grid view-->
                     <div class="row">
                         <% if $Results %>
-                        <% loop $Results %>
-                        <div class="item col-md-4">
-                            <div class="image">
-                                <a href="$Link">
-                                    <span class="btn btn-default"><i class="fa fa-file-o"></i> Details</span>
-                                </a>
-                                $PrimaryPhoto.CroppedImage(760,670)
-                            </div>
-                            <div class="price">
-                                <span>$PricePerNight.Nice</span>
-                                <p>per night
-                                <p>
-                            </div>
-                            <div class="info">
-                                <h3>
-                                    <a href="$Link">$Title</a>
-                                    <small>$Region.Title</small>
-                                    <small>Available $AvailableStart.Nice - $AvailableEnd.Nice</small>
-                                </h3>
-                                <p>$Description.LimitSentences(3)</p>
+                            <% loop $Results %>
+                            <div class="item col-md-4">
+                                <div class="image">
+                                    <a href="$Link">
+                                        <span class="btn btn-default"><i class="fa fa-file-o"></i> Details</span>
+                                    </a>
+                                    $PrimaryPhoto.CroppedImage(760,670)
+                                </div>
+                                <div class="price">
+                                    <span>$PricePerNight.Nice</span>
+                                    <p>per night
+                                    <p>
+                                </div>
+                                <div class="info">
+                                    <h3>
+                                        <a href="$Link">$Title</a>
+                                        <small>$Region.Title</small>
+                                        <small>Available $AvailableStart.Nice - $AvailableEnd.Nice</small>
+                                    </h3>
+                                    <p>$Description.LimitSentences(3)</p>
 
-                                <ul class="amenities">
-                                    <li><i class="icon-bedrooms"></i> $Bedrooms</li>
-                                    <li><i class="icon-bathrooms"></i> $Bathrooms</li>
-                                </ul>
+                                    <ul class="amenities">
+                                        <li><i class="icon-bedrooms"></i> $Bedrooms</li>
+                                        <li><i class="icon-bathrooms"></i> $Bathrooms</li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <% end_loop %>
+                            <% end_loop %>
                         <% else %>
-                        <h3>There are no properties that match your search.
-                            <% end_if %>
+                            <h3>There are no properties that match your search.
+                        <% end_if %>
                     </div>
                 </div>
                 <!-- END PROPERTY LISTING -->

@@ -12,7 +12,7 @@
                     <% loop $Regions %>
                     <div class="item col-md-12"><!-- Set width to 4 columns for grid view mode only -->
                         <div class="image image-large">
-                            <a href="#">
+                            <a href="$Link">
                                 <span class="btn btn-default"><i class="fa fa-file-o"></i> Read More</span>
                             </a>
                             $Photo.CroppedImage(720,255)
@@ -31,20 +31,31 @@
 
 
                 <!-- BEGIN PAGINATION -->
+                <% if $Regions.MoreThanOnePage %>
                 <div class="pagination">
+                    <% if $Regions.NotFirstPage %>
                     <ul id="previous">
-                        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                        <li><a href="$Regions.PrevLink"><i class="fa fa-chevron-left"></i></a></li>
                     </ul>
-                    <ul>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
+                    <% end_if %>
+                    <ul class="hidden-xs">
+                        <% loop $Regions.PaginationSummary %>
+                        <% if $Link %>
+                        <li <% if $CurrentBool %>class="active"<% end_if %>>
+                            <a href="$Link">$PageNum</a>
+                        </li>
+                        <% else %>
+                        <li>...</li>
+                        <% end_if %>
+                        <% end_loop %>
                     </ul>
-                    <ul id="next">
-                        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+                    <% if $Regions.NotLastPage %>
+                    <ul id="next col-xs-6">
+                        <li><a href="$Regions.NextLink"><i class="fa fa-chevron-right"></i></a></li>
                     </ul>
+                    <% end_if %>
                 </div>
+                <% end_if %>
                 <!-- END PAGINATION -->
 
             </div>

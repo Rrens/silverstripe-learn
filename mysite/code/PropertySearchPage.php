@@ -9,11 +9,12 @@ class PropertySearchPage_Controller extends Page_Controller
 
     public function index(SS_HTTPRequest $request)
     {
+        // echo '<pre>';
         $properties = Property::get()->limit(20);
         $filters = ArrayList::create();
 
 
-        if ($search = $request->getVar('keywords')) {
+        if ($search = $request->getVar('Keywords')) {
 
             $filters->push(ArrayData::create(array(
                 'Label' => "Keywords: '$search'",
@@ -59,7 +60,7 @@ class PropertySearchPage_Controller extends Page_Controller
             ));
         }
 
-        if ($minPrice = $request->getVar('minPrice')) {
+        if ($minPrice = $request->getVar('MinPrice')) {
             $filters->push(ArrayData::create(array(
                 'Label' => '$Min. \$$minPrice',
                 'RemoveLink' => HTTP::setGetVar('MinPrice', null)
@@ -69,7 +70,7 @@ class PropertySearchPage_Controller extends Page_Controller
             ));
         }
 
-        if ($maxPrice = $request->getVar('maxPrice')) {
+        if ($maxPrice = $request->getVar('MaxPrice')) {
             $filters->push(ArrayData::create(array(
                 'Label' => '$Max. \$$maxPrice',
                 'RemoveLink' => HTTP::setGetVar('MaxPrice', null)
@@ -79,11 +80,12 @@ class PropertySearchPage_Controller extends Page_Controller
             ));
         }
 
+
         $paginateProperties = PaginatedList::create(
             $properties,
             $request
         )
-            ->setPageLength(1)
+            ->setPageLength(5)
             ->setPaginationGetVar('s');
 
         $data =  array(
@@ -106,7 +108,7 @@ class PropertySearchPage_Controller extends Page_Controller
             $nights[$i] = "$i night" . (($i > 1) ? 's' : '');
         }
         $prices = array();
-        foreach (range(100, 1000, 50) as $i) {
+        foreach (range(100, 1000, 10) as $i) {
             $prices[$i] = '$' . $i;
         }
 
@@ -117,13 +119,13 @@ class PropertySearchPage_Controller extends Page_Controller
                 TextField::create('Keywords')
                     ->setAttribute('placeholder', 'City, State, Country, etc...')
                     ->addExtraClass('form-control'),
-                TextField::create('ArrivalDate', 'Arrive on...')
-                    ->setAttribute('data-datepicker', true)
-                    ->setAttribute('data-date-format', 'DD-MM-YYYY')
-                    ->addExtraClass('form-control'),
-                DropdownField::create('Nights', 'Stay for...')
-                    ->setSource($nights)
-                    ->addExtraClass('form-control'),
+                // TextField::create('ArrivalDate', 'Arrive on...')
+                //     ->setAttribute('data-datepicker', true)
+                //     ->setAttribute('data-date-format', 'DD-MM-YYYY')
+                //     ->addExtraClass('form-control'),
+                // DropdownField::create('Nights', 'Stay for...')
+                //     ->setSource($nights)
+                //     ->addExtraClass('form-control'),
                 DropdownField::create('Bedrooms')
                     ->setSource(ArrayLib::valuekey(range(1, 5)))
                     // ->setValue($this->request->getVar('MinBedRooms'))

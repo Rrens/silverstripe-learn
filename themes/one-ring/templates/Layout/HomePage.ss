@@ -143,7 +143,7 @@
 
 
 
-                <div class="row">
+                <%-- <div class="row">
                     <div class="col-sm-12">
                         <h1 class="section-title">Popular Regions</h1>
                         <div id="regions">
@@ -188,7 +188,7 @@
 
 
                     </div>
-                </div>
+                </div> --%>
 
                 <h1 class="section-title">Recent Articles</h1>
                 <div class="grid-style1">

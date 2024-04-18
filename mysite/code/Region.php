@@ -49,7 +49,7 @@ class Region extends DataObject
 
     public function Link()
     {
-        return $this->RegionsPage()->link('show/' . $this->ID);
+        return $this->RegionsPage()->link('show/' . strtolower($this->getTitle()));
     }
 
     public function LinkingMode()

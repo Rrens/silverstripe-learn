@@ -9,7 +9,8 @@ $databaseConfig = array(
     'server' => 'localhost',
     'username' => 'root',
     'password' => 'root',
-    'database' => 'SS_mysite',
+    'database' => 'SS_testing',
+    // 'database' => 'SS_mysite',
     'path' => ''
 );
 

@@ -33,7 +33,7 @@ class ArticleHolder extends Page
         // foreach ($page as $item) {
         //     // echo print_r($item);
         // }
-        // die();
+        // die($page);
 
         if ($page) {
             return $page->Regions();
@@ -169,7 +169,7 @@ class ArticleHolder_Controller extends Page_Controller
         );
     }
 
-    public function PaginatedArticles($num = 10)
+    public function PaginatedArticles($num = 2)
     {
         return PaginatedList::create(
             $this->articleList,

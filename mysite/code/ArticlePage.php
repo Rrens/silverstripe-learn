@@ -7,6 +7,7 @@ class ArticlePage extends Page
         'Date' => 'Date',
         'Teaser' => 'Text',
         'Author' => 'Varchar',
+        // 'Content' => 'Text',
     );
 
 
