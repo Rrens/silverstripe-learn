@@ -12,6 +12,10 @@ class Region extends DataObject
         'RegionsPage' => 'RegionsPage'
     );
 
+    private static $has_many = array(
+        'Articles' => 'ArticlePage'
+    );
+
     private static $summary_fields = array(
         'GridThumbnail' => '',
         'Title' => 'Title of region',
@@ -41,5 +45,24 @@ class Region extends DataObject
         ));
 
         return $fields;
+    }
+
+    public function Link()
+    {
+        return $this->RegionsPage()->link('show/' . $this->ID);
+    }
+
+    public function LinkingMode()
+    {
+        return Controller::curr()->getRequest()->param('ID') == $this->ID ? 'current' : 'link';
+    }
+
+    public function ArticleLink()
+    {
+        $page = ArticleHolder::get()->first();
+
+        if ($page) {
+            return $page->link('region/' . $this->ID);
+        }
     }
 }
