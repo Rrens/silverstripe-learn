@@ -110,9 +110,9 @@ class ArticleHolder_Controller extends Page_Controller
         $query->selectField("DATE_FORMAT(`Date`,'%Y_%M_%m')", "DateString")
             ->setFrom("ArticlePage_{$stage}")
             ->setOrderBy("DateString", "ASC")
-            ->setWhere("Date", 'NOT NULL')
+            // ->setWhere("Date", 'NOT NULL')
             ->setDistinct(true);
-        die($query);
+        // die($query);
         $result = $query->execute();
 
 

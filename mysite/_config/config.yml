@@ -12,3 +12,15 @@ SSViewer:
 SiteConfig:
   extensions:
     - SiteConfigExtension
+---
+Only:
+  enviroment: dev
+---
+Email:
+  send_all_emails_to: 'me@example.com'
+---
+Except:
+  enviroment: dev
+---
+Email:
+  bcc_all_emails_to: 'me@example.com'
