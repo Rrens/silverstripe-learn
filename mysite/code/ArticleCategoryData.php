@@ -1,6 +1,6 @@
 <?php
 
-class ArticleCategory extends DataObject
+class ArticleCategoryData extends DataObject
 {
 
     private static $db = array(
@@ -22,8 +22,8 @@ class ArticleCategory extends DataObject
         );
     }
 
-    public function Link()
+    public function link()
     {
-        return $this->ArticleHolder()->link('category/' . $this->ID);
+        return $this->ArticleHolder()->link('category/' . $this->Title);
     }
 }

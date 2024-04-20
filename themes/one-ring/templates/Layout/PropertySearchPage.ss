@@ -119,7 +119,7 @@
                         <% end_loop %>
                     </ul>
                 </div>
-                $PropertySearchForm
+                $propertySearchForm
                 <!-- END ADVANCED SEARCH -->
 
                 <!-- BEGIN LATEST NEWS -->

@@ -7,7 +7,7 @@
 					<div class="blog-main-image">
 						$Photo.SetWidth(750)
 					</div>
-					<p>$Description</p>
+					<p style="margin-top: 20px;">$Description</p>
 				<% end_with %>
 			</div>
 
@@ -15,8 +15,8 @@
 				<h2 class="section-title">Regions</h2>
 				<ul class="categories subnav">
 					<% loop $Regions %>
-						<li class="$LinkingMode">
-							<a class="$LinkingMode" href="$Link">$Title</a>
+						<li class="$linkingMode">
+							<a class="$linkingMode" href="$Link">$Title</a>
 						</li>
 					<% end_loop %>
 				</ul>

@@ -7,6 +7,6 @@ class PropertyAdmin extends ModelAdmin
     private static $url_segment = 'properties';
 
     private static $managed_models = array(
-        'Property'
+        'PropertyData'
     );
 }

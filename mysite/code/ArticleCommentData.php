@@ -1,6 +1,6 @@
 <?php
 
-class ArticleComment extends DataObject
+class ArticleCommentData extends DataObject
 {
 
     private static $db =  array(

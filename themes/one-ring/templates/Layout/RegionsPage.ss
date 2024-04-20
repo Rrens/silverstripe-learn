@@ -19,7 +19,7 @@
                         </div>
                         <div class="info-blog">
                             <h3>
-                                <a href="#">$Title</a>
+                                <a href="$Link">$Title</a>
                             </h3>
                             <p>$Description</p>
                         </div>

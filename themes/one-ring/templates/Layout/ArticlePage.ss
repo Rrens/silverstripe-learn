@@ -20,7 +20,7 @@
                     <ul>
                         <li><i class="fa fa-calendar"></i> $Date.Long</li>
                         <li><i class="fa fa-comments-o"></i> 3 Comments</li>
-                        <li><i class="fa fa-tags"></i> $CategoriesList </li>
+                        <li><i class="fa fa-tags"></i> $categoriesList </li>
                     </ul>
 
                     <div id="post-author"><i class="fa fa-pencil"></i> By $Author</div>
@@ -101,7 +101,7 @@
                             <p>Your email address will no be published. Required fields are marked*</p>
                         </div>
 
-                        $CommentForm
+                        $commentForm
                     </div>
                 </div>
 
@@ -114,79 +114,21 @@
 
                 <h2 class="section-title">Categories</h2>
                 <ul class="categories">
-                    <li><a href="#">Business <span>(2)</span></a></li>
-                    <li><a href="#">Commercial <span>(1)</span></a></li>
-                    <li><a href="#">Land <span>(3)</span></a></li>
-                    <li><a href="#">Loans <span>(2)</span></a></li>
-                    <li><a href="#">News and Updates <span>(6)</span></a></li>
-                    <li><a href="#">Properties for Sale <span>(1)</span></a></li>
-                    <li><a href="#">Real Estate <span>(1)</span></a></li>
+                    <% loop $Categories %>
+                    <li><a href="$Link">$Title <span>($Articles.count)</span></a></li>
+                    <% end_loop %>
                 </ul>
 
                 <!-- BEGIN ARCHIVES ACCORDION -->
                 <h2 class="section-title">Archives</h2>
                 <div id="accordion" class="panel-group blog-accordion">
                     <div class="panel">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
-                                    <i class="fa fa-chevron-right"></i> 2014 (15)
-                                </a>
-                            </div>
-                        </div>
                         <div id="collapseOne" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <ul>
-                                    <li><a href="#">July (3)</a></li>
-                                    <li><a href="#">June (4)</a></li>
-                                    <li><a href="#">May (1)</a></li>
-                                    <li><a href="#">April (2)</a></li>
-                                    <li><a href="#">March (3)</a></li>
-                                    <li><a href="#">February (1)</a></li>
-                                    <li><a href="#">January (1)</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
-                                    class="collapsed">
-                                    <i class="fa fa-chevron-right"></i> 2013 (6)
-                                </a>
-                            </div>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul>
-                                    <li><a href="#">May (1)</a></li>
-                                    <li><a href="#">April (2)</a></li>
-                                    <li><a href="#">March (1)</a></li>
-                                    <li><a href="#">February (2)</a></li>
-                                    <li><a href="#">January (1)</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
-                                    class="collapsed">
-                                    <i class="fa fa-chevron-right"></i> 2012 (5)
-                                </a>
-                            </div>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul>
-                                    <li><a href="#">April (1)</a></li>
-                                    <li><a href="#">March (1)</a></li>
-                                    <li><a href="#">February (2)</a></li>
-                                    <li><a href="#">January (1)</a></li>
+                                    <% loop $archiveDates %>
+                                    <li><a href="$Link">$MonthName $Year ($ArticleCount)</a></li>
+                                    <% end_loop %>
                                 </ul>
                             </div>
                         </div>
@@ -196,18 +138,11 @@
 
 
                 <!-- BEGIN TAGS -->
-                <h2 class="section-title">Tags</h2>
+                 <h2 class="section-title">Tags</h2>
                 <ul class="tags col-sm-12">
-                    <li><a href="#">Apartments</a></li>
-                    <li><a href="#">Residential</a></li>
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">Real estate</a></li>
-                    <li><a href="#">Land</a></li>
-                    <li><a href="#">Business</a></li>
-                    <li><a href="#">Villas</a></li>
-                    <li><a href="#">Loans</a></li>
-                    <li><a href="#">Commercial</a></li>
-                    <li><a href="#">Rent</a></li>
+                    <% loop $tagsList %>
+                    <li><a href="$Link">$Title</a></li>
+                    <% end_loop %>
                 </ul>
                 <!-- BEGIN TAGS -->
 

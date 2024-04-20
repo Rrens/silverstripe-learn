@@ -119,7 +119,7 @@
                 <h1 class="section-title">Featured Properties</h1>
 
                 <div class="grid-style1 clearfix">
-                    <% loop FeaturedProperties %>
+                    <% loop featuredProperties %>
                     <div class="item col-md-4">
                         <div class="image">
                             <a href="$Link">
@@ -192,7 +192,7 @@
 
                 <h1 class="section-title">Recent Articles</h1>
                 <div class="grid-style1">
-                    <% loop $LatestArticles(3) %>
+                    <% loop $latestArticles(3) %>
                     <div class="item col-md-4">
                         <div class="image">
                             <a href="%Link">

@@ -1,6 +1,6 @@
 <?php
 
-class Property extends DataObject
+class PropertyData extends DataObject
 {
     private static $db = array(
         'Title' => 'Varchar',
@@ -14,13 +14,13 @@ class Property extends DataObject
     );
 
     private static $has_one = array(
-        'Region' => 'Region',
+        'Region' => 'RegionData',
         'PrimaryPhoto' => 'Image'
     );
 
     private static $summary_fields = array(
         'Title' => 'Title',
-        'Region.Title' => 'Region',
+        'Region.Title' => 'RegionData',
         'PricePerNight.Nice' => 'Price',
         'FeaturedOnHomepage.Nice' => 'Featured?'
     );
@@ -38,7 +38,7 @@ class Property extends DataObject
                 'title' => 'Region',
                 'field' => DropdownField::create('RegionID')
                     ->setSource(
-                        Region::get()->map('ID', 'Title')
+                        RegionData::get()->map('ID', 'Title')
                     )
                     ->setEmptyString('-- Any region --')
             ),
@@ -62,7 +62,7 @@ class Property extends DataObject
             DropdownField::create('Bathrooms')
                 ->setSource(ArrayLib::valuekey(range(1, 10))),
             DropdownField::create('RegionID', 'Region')
-                ->setSource(Region::get()->map('ID', 'Title'))
+                ->setSource(RegionData::get()->map('ID', 'Title'))
                 ->setEmptyString('-- Select a region --'),
             CheckboxField::create('FeaturedOnHomepage', 'Feature on homepage')
         ));

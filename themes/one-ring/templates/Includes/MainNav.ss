@@ -12,7 +12,7 @@
                     <ul class="nav navbar-nav">
                         <% loop $Menu(1) %>
                         <li>
-                            <a class="$LinkingMode" href="$Link">$MenuTitle</a>
+                            <a class="$linkingMode" href="$Link">$MenuTitle</a>
                         </li>
                         <% end_loop %>
                     </ul>
