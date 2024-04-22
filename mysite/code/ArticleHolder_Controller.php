@@ -139,9 +139,9 @@ class ArticleHolder_Controller extends Page_Controller
             foreach ($tags as $tag) {
                 $list->push(ArrayData::create(array(
                     'Title' => $tag->Title,
-                    'Link' => $this->Link("tag/{$tag->Title}"),
+                    'Link' => $this->Link("tag/{$tag->Slug}"),
                     'ArticleCount' => ArticlePage::get()->filter(array(
-                        'Tags.Title' => $tag->Title
+                        'Tags.Slug' => $tag->Slug
                     ))->Count()
                 )));
             }
@@ -154,7 +154,7 @@ class ArticleHolder_Controller extends Page_Controller
     {
 
         $tag = TagData::get()->filter(array(
-            'TItle' => $request->param('ID')
+            'Slug' => $request->param('ID')
         ))->first();
 
         if (!$tag) {

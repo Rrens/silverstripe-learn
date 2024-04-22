@@ -1,12 +1,13 @@
 <?php
 
-use phpDocumentor\Reflection\DocBlock\Description;
 
 class TagData extends DataObject
 {
 
     private static $db = array(
-        'Title' => 'Varchar'
+        'Title' => 'Varchar',
+        'Slug' => 'Varchar',
+        'Description' => 'Varchar',
     );
 
     private static $belongs_many_many = array(
@@ -20,7 +21,8 @@ class TagData extends DataObject
     public function getCMSFields()
     {
         $fields = FieldList::create(
-            TextField::create('Title')->setTitle('Tag')->setDescription('Tag must be unique')
+            TextField::create('Title')->setTitle('Tag'),
+            TextField::create('Slug')->setTitle('Slug')->setDescription('Slug Tag must be unique')
         );
 
         return $fields;
@@ -30,12 +32,13 @@ class TagData extends DataObject
     {
         $result = parent::validate();
 
-        if ($this->Title) {
-            $this->Title = str_replace(' ', '-', $this->Title);
-            $existingTitle = TagData::get()->filter('Title', $this->Title)->exclude('ID', $this->ID)->first();
+        if ($this->Slug) {
+            // $this->Slug = str_replace(' ', '-', $this->Slug);
+            $this->Slug = GeneratorGlobalClass::generate($this->Slug);
+            $existingSlug = TagData::get()->filter('Slug', $this->Slug)->exclude('ID', $this->ID)->first();
 
-            if ($existingTitle) {
-                throw new ValidationException('Tags must be unique');
+            if ($existingSlug) {
+                throw new ValidationException('Slug must be unique');
             }
         }
         return $result;
@@ -43,6 +46,6 @@ class TagData extends DataObject
 
     public function link()
     {
-        return $this->ArticleHolder()->link('tag/' . $this->Title);
+        return $this->ArticleHolder()->link('tag/' . $this->Slug);
     }
 }

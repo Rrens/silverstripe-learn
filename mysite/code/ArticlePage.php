@@ -8,13 +8,11 @@ class ArticlePage extends Page
         // 'Content' => 'Text',
     );
 
-
     private static $has_one = array(
         'Photo' => 'Image',
         'Brochure' => 'File',
         'Region' => 'RegionData',
     );
-
 
     private static $many_many = array(
         'Categories' => 'ArticleCategoryData',
@@ -67,7 +65,6 @@ class ArticlePage extends Page
             'Region',
             RegionData::get()->map('ID', 'Title')
         )->setEmptyString('-- None --'), 'Content');
-
 
         return $fields;
     }

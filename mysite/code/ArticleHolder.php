@@ -34,18 +34,18 @@ class ArticleHolder extends Page
         return $fields;
     }
 
-    public function regions()
-    {
-        // echo '<pre>';
-        $page = RegionsPage::get()->first();
-        // echo print_r($page->Regions());
-        // foreach ($page as $item) {
-        //     // echo print_r($item);
-        // }
-        // die($page);
+    // public function regions()
+    // {
+    //     // echo '<pre>';
+    //     $page = RegionsPage::get()->first();
+    //     // echo print_r($page->Regions());
+    //     // foreach ($page as $item) {
+    //     //     // echo print_r($item);
+    //     // }
+    //     // die($page);
 
-        if ($page) {
-            return $page->regions();
-        }
-    }
+    //     if ($page) {
+    //         return $page->regions();
+    //     }
+    // }
 }

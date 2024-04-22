@@ -46,7 +46,7 @@ class RegionData extends DataObject
         $result = parent::validate();
 
         if ($this->Slug) {
-            $this->Slug = str_replace(' ', '-', $this->Slug);
+            $this->Slug = GeneratorGlobalClass::generate($this->Slug);
             $existingSlug = RegionData::get()->filter('Slug', $this->Slug)->exclude('ID', $this->ID)->first();
             if ($existingSlug) {
                 throw new ValidationException('Slug must be unique');

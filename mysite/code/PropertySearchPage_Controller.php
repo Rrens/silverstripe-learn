@@ -2,12 +2,16 @@
 class PropertySearchPage_Controller extends Page_Controller
 {
 
+    private static $allowed_actions = array(
+        'property',
+        'test'
+    );
+
     public function index(SS_HTTPRequest $request)
     {
         // echo '<pre>';
         $properties = PropertyData::get()->limit(20);
         $filters = ArrayList::create();
-
 
         if ($search = $request->getVar('Keywords')) {
 
@@ -57,7 +61,7 @@ class PropertySearchPage_Controller extends Page_Controller
 
         if ($minPrice = $request->getVar('MinPrice')) {
             $filters->push(ArrayData::create(array(
-                'Label' => '$Min. \$$minPrice',
+                'Label' => '$Min' . "\$$minPrice",
                 'RemoveLink' => HTTP::setGetVar('MinPrice', null)
             )));
             $properties = $properties->filter(array(
@@ -67,7 +71,7 @@ class PropertySearchPage_Controller extends Page_Controller
 
         if ($maxPrice = $request->getVar('MaxPrice')) {
             $filters->push(ArrayData::create(array(
-                'Label' => '$Max. \$$maxPrice',
+                'Label' => '$Max' . "\$$maxPrice",
                 'RemoveLink' => HTTP::setGetVar('MaxPrice', null)
             )));
             $properties = $properties->filter(array(
@@ -75,6 +79,26 @@ class PropertySearchPage_Controller extends Page_Controller
             ));
         }
 
+        if ($propertyType = $request->getVar('PropertyType')) {
+            $filters->push(ArrayData::create(array(
+                'Label' => 'Property Type',
+                'RemoveLink' => HTTP::setGetVar('PropertyType', null)
+            )));
+            $properties = $properties->filter(array(
+                'PropertyTypeID:PartialMatch' => $propertyType,
+            ));
+        }
+
+        if ($transactionType = $request->getVar('TransactionType')) {
+            $filters->push(ArrayData::create(array(
+                'Label' => 'Transaction Type',
+                'RemoveLink' => HTTP::setGetVar('TransactionType', null)
+            )));
+
+            $properties =  $properties->filter(array(
+                'TransactionType:PartialMatch' => $transactionType,
+            ));
+        }
 
         $paginateProperties = PaginatedList::create(
             $properties,
@@ -82,6 +106,29 @@ class PropertySearchPage_Controller extends Page_Controller
         )
             ->setPageLength(5)
             ->setPaginationGetVar('s');
+
+        // $arrayList = ArrayList::create();
+        // foreach ($paginateProperties as $item) {
+        //     // $item->linkURL = $this->Link("property/$item->Title");
+        //     $arrayList->push(ArrayData::create(array(
+        //         'Title' => $item->Title,
+        //         'Link' => $this->Link("property/$item->Title"),
+        //         'PricePerNight' => $item->PricePerNight,
+        //         'Bedrooms' => $item->Bedrooms,
+        //         'Bathrooms' => $item->Bathrooms,
+        //         'AvailableStart' => $item->AvailableStart,
+        //         'AvailableEnd' => $item->AvailableEnd,
+        //         'Description' => $item->Description,
+        //         // 'Address' => $item->Address,
+        //         // 'PropertyType' => $item->PropertyType,
+        //         // 'TransactionType' => $item->TransactionType,
+        //         // 'FeaturedOnHomepage' => $item->FeaturedOnHomepage
+        //         'Photo' => $item->Photo
+
+        //     )));
+        //     print_r($$arrayList);
+        // }
+
 
         $data =  array(
             'Results' => $paginateProperties,
@@ -92,7 +139,6 @@ class PropertySearchPage_Controller extends Page_Controller
             return $this->customise($data)
                 ->renderWith('PropertySearchResult');
         }
-
         return $data;
     }
 
@@ -135,7 +181,18 @@ class PropertySearchPage_Controller extends Page_Controller
                 DropdownField::create('MaxPrice', 'Max. price')
                     ->setEmptyString('-- any --')
                     ->setSource($prices)
+                    ->addExtraClass('form-control'),
+                DropdownField::create('PropertyType', 'Property Type')
+                    ->setEmptyString('-- choose property type --')
+                    ->setSource(PropertyTypeData::get()->map('ID', 'Title'))
+                    ->addExtraClass('form-control'),
+                DropdownField::create('TransactionType', 'Transaction Type')
+                    ->setEmptyString('-- choose transaction type --')
                     ->addExtraClass('form-control')
+                    ->setSource(array(
+                        'Sell' => 'Sell',
+                        'Rent' => 'Rent',
+                    )),
             ),
             FieldList::create(
                 FormAction::create('doPropertySearch', 'Search')
@@ -149,5 +206,48 @@ class PropertySearchPage_Controller extends Page_Controller
             ->loadDataFrom($this->request->getVars());
 
         return $form;
+    }
+
+    public function property(SS_HTTPRequest $request)
+    {
+        $property = PropertyData::get()->filter(array(
+            'Slug' => $request->param('ID'),
+        ))->first();
+
+        $agent = AgentData::get()->filter(array(
+            'ID' => $property->AgentsID
+        ))->first();
+
+        $propertyType = PropertyTypeData::get()->filter(array(
+            'ID' => $property->PropertyTypeID
+        ))->first();
+
+        if (!$property) {
+            return $this->httpError(404, 'That region could not be found');
+        }
+
+        $data = array(
+            'Property' => $property,
+            'Title' => $property->Title,
+            'Agent' => $agent,
+            'PropertyType' => $propertyType,
+        );
+
+
+
+        if ($request->isAjax()) {
+            return $this->renderWith('PropertySearchPage_property');
+        }
+        // if ($request->isAjax()) {
+        //     return $this->customise($data)
+        //         ->renderWith('PropertySearchResult');
+        // }
+
+        return $data;
+    }
+
+    public function test()
+    {
+        die('test');
     }
 }
